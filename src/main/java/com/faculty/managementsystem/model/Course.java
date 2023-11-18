@@ -5,19 +5,17 @@ import lombok.*;
 
 @Entity
 @Table(name = "course")
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@Data
 public class Course {
     @Id
-    @Column(name = "course_id")
+    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
-    @Column(name = "course_name")
+    @Column
     String name;
-    @Column(name = "course_departamnent")
+    @Column
     String department;
 
     public Course(String name, String department) {

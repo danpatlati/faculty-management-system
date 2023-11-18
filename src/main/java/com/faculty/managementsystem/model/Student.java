@@ -7,24 +7,23 @@ import lombok.*;
 @Table(name = "student")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
-@ToString
+@Data
 public class Student {
     @Id
-    @Column(name = "student_id")
+    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
-    @Column(name = "student_name")
-    String name;
-    @Column(name = "student_gender")
-    String gender;
-    @Column(name = "student_department")
-    String departament;
+    private Integer id;
+    @Column
+    private String name;
+    @Column
+    private String gender;
+    @Column
+    private String department;
 
-    public Student(String name, String gender, String departament) {
+
+    public Student(String name, String gender, String department) {
         this.name = name;
         this.gender = gender;
-        this.departament = departament;
+        this.department = department;
     }
 }

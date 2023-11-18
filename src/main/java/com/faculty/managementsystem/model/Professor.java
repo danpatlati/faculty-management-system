@@ -5,26 +5,20 @@ import lombok.*;
 
 @Entity
 @Table(name = "professor")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@Data
 public class Professor {
 
     @Id
-    @SequenceGenerator(
-            name = "professor_id_seq",
-            sequenceName = "professor_id_seq",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "professor_id_seq"
-    )
-    private Long id;
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column
     private String name;
+    @Column
     private String gender;
+    @Column
     private String department;
 
     public Professor(String name, String gender, String department) {
