@@ -2,6 +2,7 @@ package com.faculty.managementsystem.controller;
 
 import com.faculty.managementsystem.model.Professor;
 import com.faculty.managementsystem.service.ProfessorService;
+import com.faculty.managementsystem.service.ProfessorServiceImp;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -9,32 +10,32 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/")
+@RequestMapping(path = "/professor")
 @AllArgsConstructor
 public class ProfessorController {
 
-    private final ProfessorService professorService;
+    private final ProfessorServiceImp professorServiceImp;
 
     @GetMapping
     public List<Professor> getProfessors() {
-        return professorService.getProfessors();
+        return professorServiceImp.getProfessors();
     }
 
-    @PostMapping(path = "add-professor")
+    @PostMapping
     public void registerNewProfessor(@RequestBody Professor professor) {
-        professorService.addNewProfessor(professor);
+        professorServiceImp.addNewProfessor(professor);
     }
 
-    @DeleteMapping(path = "delete-professor/{professorId}")
-    public void deleteProfessor(@PathVariable(name = "professorId") Long professorId) {
-        professorService.deleteProfessor(professorId);
+    @DeleteMapping(path = "{professorId}")
+    public void deleteProfessor(@PathVariable(name = "professorId") Integer professorId) {
+        professorServiceImp.deleteProfessor(professorId);
     }
 
-    @PutMapping(path = "update-professor/{professorId}")
-    public void updateProfessor(@PathVariable("professorId") Long professorId,
+    @PutMapping(path = "{professorId}")
+    public void updateProfessor(@PathVariable("professorId") Integer professorId,
                                 @RequestParam(required = false) String name,
-                                @RequestParam(required = false) String newDepartment) {
-        professorService.updateProfessor(professorId, name, newDepartment);
+                                @RequestParam(required = false) String department) {
+        professorServiceImp.updateProfessor(professorId, name, department);
     }
 
 }
