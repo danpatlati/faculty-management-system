@@ -22,11 +22,17 @@ public class Grades {
     private Double geography;
     private Double final_grade;
 
-    public Grades(Double english, Double romanian, Double mathematics, Double geography, Double final_grade) {
+    @PrePersist
+    @PreUpdate
+    private void calculateFinalGrade() {
+        this.final_grade = (english + romanian + mathematics + geography) / 4;
+    }
+
+    public Grades(Double english, Double romanian, Double mathematics, Double geography) {
         this.english = english;
         this.romanian = romanian;
         this.mathematics = mathematics;
         this.geography = geography;
-        this.final_grade = final_grade;
+
     }
 }

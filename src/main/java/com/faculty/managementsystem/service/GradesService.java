@@ -1,43 +1,24 @@
 package com.faculty.managementsystem.service;
 
 import com.faculty.managementsystem.model.Grades;
-import com.faculty.managementsystem.repository.GradesRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
-@AllArgsConstructor
-public class GradesService {
-    private final GradesRepository gradesRepository;
+public interface GradesService {
+    List<Grades> getAllGrades();
 
-    public List<Grades> getAllGrades() {
-        return gradesRepository.findAll();
-    }
+    Optional<Grades> getAllGradesById(Long id);
 
-    public Optional<Grades> getAllGradesById(Long id) {
-        return gradesRepository.findById(id);
-    }
+    void addGrades(Grades grades);
 
-    public void addGrades(Grades grades) {
-        gradesRepository.save(grades);
-    }
+    void updateGrades(Long id, Grades grades);
 
-    public void updateGrades(Long id, Grades grades) {
-        grades.setId(id);
-        gradesRepository.save(grades);
-    }
+    void deleteGradesById(Long id);
+
+    void deleteAllGrades();
 
 
-    public void deleteGradesById(Long id) {
-        gradesRepository.deleteById(id);
-
-    }
 
 
-    public void deleteAllGrades() {
-        gradesRepository.deleteAll();
-    }
 }
