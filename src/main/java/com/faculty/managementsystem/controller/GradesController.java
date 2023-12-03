@@ -1,7 +1,10 @@
 package com.faculty.managementsystem.controller;
 
+import com.faculty.managementsystem.exception.GradesNotFoundException;
 import com.faculty.managementsystem.model.Grades;
+import com.faculty.managementsystem.model.Student;
 import com.faculty.managementsystem.service.GradesServiceImp;
+import com.faculty.managementsystem.service.StudentServiceImp;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +16,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class GradesController {
     private final GradesServiceImp gradesServiceImp;
+    private final StudentServiceImp studentServiceImp;
 
     @GetMapping("/all")
     public List<Grades> getAllGrades() {
@@ -21,7 +25,7 @@ public class GradesController {
 
     @GetMapping("/all/{id}")
     public Optional<Grades> getAllGradesById(@PathVariable Long id) {
-        return gradesServiceImp.getAllGradesById(id);
+        return gradesServiceImp.getGradesById(id);
     }
 
 
@@ -36,6 +40,21 @@ public class GradesController {
         gradesServiceImp.updateGrades(id, grades);
         return String.format("The grades at id: %s were updated!", id);
     }
+
+    @PutMapping("/{gradesid}/student/{studentid}")
+    public Grades enrollStudentToGrades(
+            @PathVariable Long gradesid,
+            @PathVariable Integer studentid
+    ) {
+        Optional<Grades> optionalGrades = gradesServiceImp.getGradesById(gradesid);
+
+        return gradesServiceImp.addGrades(optionalGrades.map(grades -> {
+            Student student = studentServiceImp.getStudentById(studentid);
+            grades.enrollStudent(student);
+            return grades;
+        }).orElseThrow(() -> new GradesNotFoundException("Grades not found for id: " + gradesid)));
+    }
+
 
     @DeleteMapping("/deleteAll")
     public String deleteAllGrades() {

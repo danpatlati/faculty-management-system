@@ -1,7 +1,10 @@
 package com.faculty.managementsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "professor")
@@ -20,6 +23,9 @@ public class Professor {
     private String gender;
     @Column
     private String department;
+    @JsonIgnore
+    @OneToMany(mappedBy = "professor",cascade = CascadeType.ALL)
+    private List<Course> courses;
 
     public Professor(String name, String gender, String department) {
         this.name = name;

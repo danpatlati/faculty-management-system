@@ -18,13 +18,13 @@ public class GradesServiceImp implements GradesService {
         return gradesRepository.findAll();
     }
     @Override
-    public Optional<Grades> getAllGradesById(Long id) {
+    public Optional<Grades> getGradesById(Long id) {
         return gradesRepository.findById(id);
     }
 
     @Override
-    public void addGrades(Grades grades) {
-        gradesRepository.save(grades);
+    public Grades addGrades(Grades grades) {
+        return gradesRepository.save(grades);
     }
     @Override
     public void updateGrades(Long id, Grades grades) {

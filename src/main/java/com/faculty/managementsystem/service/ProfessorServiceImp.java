@@ -1,5 +1,6 @@
 package com.faculty.managementsystem.service;
 
+import com.faculty.managementsystem.exception.NotFoundExceptionProfessor;
 import com.faculty.managementsystem.model.Professor;
 import com.faculty.managementsystem.repository.ProfessorRepository;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,16 @@ public class ProfessorServiceImp implements ProfessorService {
     @Override
     public List<Professor> getProfessors() {
         return professorRepository.findAll();
+    }
+
+
+    public Professor getProfessorById(Integer id){
+        Optional<Professor> optionalProfessor = professorRepository.findById(id);
+        Professor professor = optionalProfessor.orElseThrow(() -> {
+            throw new NotFoundExceptionProfessor("Professor not found for id: " + id);
+        });
+
+        return professor;
     }
 
     @Override
