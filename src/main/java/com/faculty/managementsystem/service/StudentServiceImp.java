@@ -4,6 +4,8 @@ import com.faculty.managementsystem.model.Student;
 import com.faculty.managementsystem.repository.StudentRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,8 +15,6 @@ import java.util.Optional;
 @AllArgsConstructor
 public class StudentServiceImp implements StudentService{
     private final StudentRepository studentRepository;
-
-
     public Student addStudent(Student student) {
         return studentRepository.save(student);
     }
@@ -25,8 +25,9 @@ public class StudentServiceImp implements StudentService{
         return student;
     }
 
-    public List<Student> getAllStudents() {
-        return studentRepository.findAll();
+    public List<Student> getAllStudents(PageRequest pageRequest) {
+        Page<Student> page = studentRepository.findAll(pageRequest);
+        return page.getContent();
     }
     public Student updateStudent(Integer id,Student updatedStudent){
         Optional<Student> existingStudentOptional = studentRepository.findById(id);

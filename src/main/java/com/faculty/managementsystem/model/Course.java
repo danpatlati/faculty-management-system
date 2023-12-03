@@ -22,9 +22,9 @@ public class Course {
     private String name;
     private String department;
     @JsonIgnore
-    @ManyToMany(mappedBy = "courses",fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "courses",cascade = CascadeType.ALL)
     private Set<Student> student;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "profesor_id")
     private Professor professor;
 

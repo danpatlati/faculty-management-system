@@ -9,6 +9,9 @@ public interface CourseService {
      List<Course> getAllCourse();
 
      Course getCourseById(Integer id);
+     List<Course> findByProfessorId(Integer id);
+     List<Course> search(String keyword);
+
      Course addCourse(Course course);
      void deleteCousceById(Integer id);
 }

@@ -24,6 +24,11 @@ public class GradesServiceImp implements GradesService {
     }
 
     @Override
+    public Grades findByStudentId(Integer id) {
+        return gradesRepository.findByStudentId(id);
+    }
+
+    @Override
     public Grades addGrades(Grades grades) {
         return gradesRepository.save(grades);
     }

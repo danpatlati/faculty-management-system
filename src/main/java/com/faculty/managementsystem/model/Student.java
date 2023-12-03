@@ -20,7 +20,7 @@ public class Student {
     private String name;
     private String gender;
     private String department;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "student_course",
             joinColumns = @JoinColumn(name = "student_id"),
