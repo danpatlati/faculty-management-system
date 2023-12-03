@@ -1,5 +1,6 @@
 package com.faculty.managementsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,8 +25,6 @@ public class Grades {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "student_id")
     private Student student;
-
-
 
     @PrePersist
     @PreUpdate

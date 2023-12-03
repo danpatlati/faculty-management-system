@@ -27,16 +27,27 @@ public class CourseController {
     public List<Course> getAllCourse(){
         return courseServiceImp.getAllCourse();
     }
+
+    @GetMapping("/getCourse/{id}")
+    public ResponseEntity<Course> getCourseById(@PathVariable("id") Integer id){
+        Course course = courseServiceImp.getCourseById(id);
+        return new ResponseEntity<>(course,HttpStatus.OK);
+    }
+    @GetMapping("/getCourseByProfessor/{id}")
+    public  ResponseEntity<List<Course>> getCourseByProfessor(@PathVariable Integer id){
+        List<Course> courses = courseServiceImp.findByProfessorId(id);
+        return new ResponseEntity<>(courses, HttpStatus.OK);
+    }
     @PostMapping("/addCourse")
     public ResponseEntity<Void> addCourse(@RequestBody Course course){
         courseServiceImp.addCourse(course);
         log.info("Cursul {} a fost adaugat cu succes",course.toString());
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-    @GetMapping("/getCourse/{id}")
-    public ResponseEntity<Course> getCourseById(@PathVariable("id") Integer id){
-        Course course = courseServiceImp.getCourseById(id);
-        return new ResponseEntity<>(course,HttpStatus.OK);
+    @GetMapping("/search")
+    public ResponseEntity<List<Course>> searchCourse(@RequestParam(defaultValue = "Computer Science") String keyword){
+        List<Course> course = courseServiceImp.search(keyword);
+        return new ResponseEntity<>(course, HttpStatus.OK);
     }
     @PutMapping("{courseid}/professor/{professorid}")
     public Course enrollCourseToProfessor(
