@@ -12,7 +12,7 @@ public interface GradesService {
 
     Grades addGrades(Grades grades);
 
-    void updateGrades(Long id, Grades grades);
+    Grades updateGrades(Long id, Grades grades);
 
     void deleteGradesById(Long id);
 
