@@ -8,9 +8,9 @@ import java.util.Optional;
 public interface GradesService {
     List<Grades> getAllGrades();
 
-    Optional<Grades> getAllGradesById(Long id);
+    Optional<Grades> getGradesById(Long id);
 
-    void addGrades(Grades grades);
+    Grades addGrades(Grades grades);
 
     void updateGrades(Long id, Grades grades);
 
