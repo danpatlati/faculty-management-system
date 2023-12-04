@@ -36,7 +36,7 @@ public class CourseServiceImp implements CourseService {
         return courseRepository.findByProfessorId(id);
     }
 
-    public void deleteCousceById(Integer id) {
+    public void deleteCourseById(Integer id) {
         courseRepository.deleteById(id);
     }
 

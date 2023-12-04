@@ -5,13 +5,13 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "student")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 public class Student {
     @Id
     @Column
@@ -26,7 +26,7 @@ public class Student {
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id")
     )
-    private Set<Course> courses;
+    private List<Course> courses;
     @JsonIgnore
     @OneToOne(mappedBy = "student")
     private Grades grades;
