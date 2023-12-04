@@ -46,7 +46,7 @@ public class ProfessorServiceImp implements ProfessorService {
         Optional<Professor> professorExists =
                 professorRepository.findById(professorId);
         if (professorExists.isEmpty()) {
-            throw new IllegalStateException("Professor with id '" + professorId + "' does not exists!");
+            throw new IllegalStateException("Professor with id '" + professorId + "' does not exist!");
         }
         professorRepository.deleteById(professorId);
     }
