@@ -18,6 +18,9 @@ public class StudentServiceImp implements StudentService{
     public Student addStudent(Student student) {
         return studentRepository.save(student);
     }
+    public Optional<List<Student>> getStudentByName(String name){
+        return studentRepository.findStudentByName(name);
+    }
 
     public Student getStudentById(Integer id) {
         Student student =  studentRepository.findById(id)
@@ -48,9 +51,6 @@ public class StudentServiceImp implements StudentService{
     }
     public void deleteStudentById(Integer id) {
         studentRepository.deleteById(id);
-    }
-    public Optional<List<Student>> getStudentByName(String name){
-        return studentRepository.findStudentByName(name);
     }
 
 }
