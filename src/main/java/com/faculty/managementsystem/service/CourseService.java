@@ -13,5 +13,5 @@ public interface CourseService {
      List<Course> search(String keyword);
 
      Course addCourse(Course course);
-     void deleteCousceById(Integer id);
+     void deleteCourseById(Integer id);
 }

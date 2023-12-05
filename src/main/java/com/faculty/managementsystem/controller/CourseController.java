@@ -4,16 +4,13 @@ import com.faculty.managementsystem.model.Course;
 import com.faculty.managementsystem.model.Professor;
 import com.faculty.managementsystem.service.CourseServiceImp;
 import com.faculty.managementsystem.service.ProfessorServiceImp;
-import com.faculty.managementsystem.service.StudentServiceImp;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -61,7 +58,7 @@ public class CourseController {
     }
     @DeleteMapping("/deleteCourse/{id}")
     public ResponseEntity<Void> deleteCousceById(@PathVariable("id") Integer id){
-        courseServiceImp.deleteCousceById(id);
+        courseServiceImp.deleteCourseById(id);
         log.info("Cursul {} a fost sters cu succes",id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
