@@ -24,7 +24,7 @@ public class GradesController {
     }
 
     @GetMapping("/all/{id}")
-    public Optional<Grades> getAllGradesById(@PathVariable Long id) {
+    public Optional<Grades> getGradesById(@PathVariable Long id) {
         return gradesServiceImp.getGradesById(id);
     }
 

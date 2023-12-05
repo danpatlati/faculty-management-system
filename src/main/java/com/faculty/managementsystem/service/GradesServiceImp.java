@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -32,13 +33,29 @@ public class GradesServiceImp implements GradesService {
         return gradesRepository.save(grades);
     }
     @Override
-    public void updateGrades(Long id, Grades grades) {
-        grades.setId(id);
-        gradesRepository.save(grades);
+    public Grades updateGrades(Long id, Grades newGrades) {
+        Optional<Grades> OptionalCurrentGrades = gradesRepository.findById(id);
+
+        if (OptionalCurrentGrades.isPresent()) {
+            Grades currentGrades = gradesRepository.findById(id).get();
+
+            currentGrades.setEnglish(newGrades.getEnglish());
+            currentGrades.setRomanian(newGrades.getRomanian());
+            currentGrades.setMathematics(newGrades.getMathematics());
+            currentGrades.setGeography(newGrades.getGeography());
+
+            return gradesRepository.save(currentGrades);
+        } else {
+            throw new NoSuchElementException("There are no grades found with id: " + id);
+        }
     }
     @Override
     public void deleteGradesById(Long id) {
-        gradesRepository.deleteById(id);
+        if (gradesRepository.findById(id).isPresent()) {
+            gradesRepository.deleteById(id);
+        } else {
+            throw new NoSuchElementException("There are no grades found with id: " + id);
+        }
 
     }
 

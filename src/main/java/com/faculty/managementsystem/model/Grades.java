@@ -8,6 +8,7 @@ import lombok.*;
 @Table(name = "grades")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -22,7 +23,7 @@ public class Grades {
     private Double mathematics;
     private Double geography;
     private Double final_grade;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "student_id")
     private Student student;
 
