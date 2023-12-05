@@ -51,7 +51,11 @@ public class GradesServiceImp implements GradesService {
     }
     @Override
     public void deleteGradesById(Long id) {
-        gradesRepository.deleteById(id);
+        if (gradesRepository.findById(id).isPresent()) {
+            gradesRepository.deleteById(id);
+        } else {
+            throw new NoSuchElementException("There are no grades found with id: " + id);
+        }
 
     }
 

@@ -8,6 +8,7 @@ import lombok.*;
 @Table(name = "grades")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
